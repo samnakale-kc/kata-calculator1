@@ -18,7 +18,7 @@ namespace StringCalculator1
                 return 0;
             }
 
-            return cleanNumbersInput.Split(',')
+            return cleanNumbersInput.Split([',', '\n'])
                 .Select(int.Parse)
                 .Sum();
         }
