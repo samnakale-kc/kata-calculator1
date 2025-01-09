@@ -62,6 +62,36 @@ namespace StringCalculator1Tests
         }
 
         [Test]
+        public void Clean_DelimeterLengthMoreThan1_ExpecCleanString()
+        {
+            // Arrange
+            string input = "//***\n1***2***3";
+            var parser = new InputStringParser();
+
+            // Act 
+            string result = parser.Clean(input);
+
+            // Assert
+            result.Should().Be("1,2,3");
+
+        }
+
+        [Test]
+        public void Clean_MultipleDelimetersWithSingleCharacter_ExpecCleanString()
+        {
+            // Arrange
+            string input = "//[*][%]\n1*2%3";
+            var parser = new InputStringParser();
+
+            // Act 
+            string result = parser.Clean(input);
+
+            // Assert
+            result.Should().Be("1,2,3");
+
+        }
+
+        [Test]
         public void ConvertCleanInputToArray_StringWithDifferentDelimeterOnFirstLine_ExpecCleanString()
         {
             // Arrange

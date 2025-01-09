@@ -158,5 +158,35 @@ namespace StringCalculator1Tests
 
         }
 
+        [Test]
+        public void Add_InputStringWithDelimeterLongerThanOneCharacter_ExpectSum()
+        {
+            // Arrange
+            string numbers = "//***\n1***2***3";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(6);
+
+        }
+
+        [Test]
+        public void Add_InputStringWithMoreThanOneDelimeter_ExpectSum()
+        {
+            // Arrange
+            string numbers = "//[*][%]\n1*2%3";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(6);
+
+        }
+
     }
 }
