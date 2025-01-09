@@ -13,6 +13,18 @@ namespace StringCalculator1
         {
             string cleanNumbersInput = numbers.Trim();
 
+            string regexPatternForMultipleDelimeters = @"\/\/\[(.+)\]\n*";
+            Match multipleDelimetersMatch = Regex.Match(cleanNumbersInput, regexPatternForMultipleDelimeters);
+
+            if (multipleDelimetersMatch.Success)
+            {
+                string[] delimetersMatched = multipleDelimetersMatch.Groups[1].Value.Split("][", StringSplitOptions.RemoveEmptyEntries);
+                foreach (string delimeter in delimetersMatched)
+                {
+                    cleanNumbersInput = cleanNumbersInput.Replace(delimeter, ",");
+                }
+            }
+
             Match match = Regex.Match(cleanNumbersInput, @"\/\/(.+)\n*");
 
             if (match.Success)
