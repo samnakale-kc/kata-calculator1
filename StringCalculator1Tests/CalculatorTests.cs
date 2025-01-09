@@ -54,5 +54,20 @@ namespace StringCalculator1Tests
             result.Should().Be(0);
         }
 
+        [Test]
+        public void Add_WithNewLineInString_ExpectSum()
+        {
+            // Arrange
+            string numbers = "1\n2,3";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(6);
+
+        }
+
     }
 }
