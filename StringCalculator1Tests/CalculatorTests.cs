@@ -69,5 +69,35 @@ namespace StringCalculator1Tests
 
         }
 
+        [Test]
+        public void Add_WithDifferentDelimeterString_ExpectSum()
+        {
+            // Arrange
+            string numbers = "//;\n1;2";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(3);
+
+        }
+
+        [Test]
+        public void Add_WithDifferentDelimeterStringWithoutTheFirstLineShowingDelimeter_ExpectSum()
+        {
+            // Arrange
+            string numbers = "1;2";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(3);
+
+        }
+
     }
 }
