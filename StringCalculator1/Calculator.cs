@@ -18,10 +18,9 @@ namespace StringCalculator1
                 return 0;
             }
 
-            string[] numbersList = cleanNumbersInput.Split(',');
-            int[] integerNumbersList = numbersList.Select(int.Parse).ToArray();
-
-            return integerNumbersList.Sum();
+            return cleanNumbersInput.Split(',')
+                .Select(int.Parse)
+                .Sum();
         }
 
     }
