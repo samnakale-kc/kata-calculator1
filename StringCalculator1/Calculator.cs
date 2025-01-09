@@ -10,7 +10,6 @@ namespace StringCalculator1
     {
         public int Add(string numbers)
         {
-
             string cleanNumbersInput = numbers.Trim();
 
             if (cleanNumbersInput.Length == 0)
@@ -18,7 +17,8 @@ namespace StringCalculator1
                 return 0;
             }
 
-            return cleanNumbersInput.Split([',', '\n'])
+            char[] stringDelimeters = [',', '\n'];
+            return cleanNumbersInput.Split(stringDelimeters, StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
                 .Sum();
         }
