@@ -10,7 +10,18 @@ namespace StringCalculator1
     {
         public int Add(string numbers)
         {
-            return 99;
+
+            string cleanNumbersInput = numbers.Trim();
+
+            if (cleanNumbersInput.Length == 0)
+            {
+                return 0;
+            }
+
+            string[] numbersList = cleanNumbersInput.Split(',');
+            int[] integerNumbersList = numbersList.Select(int.Parse).ToArray();
+
+            return integerNumbersList.Sum();
         }
 
     }
