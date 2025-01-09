@@ -31,6 +31,7 @@ namespace StringCalculator1
             char[] stringDelimeters = [',', '\n'];
             return cleanNumbersInput.Split(stringDelimeters, StringSplitOptions.RemoveEmptyEntries)
                 .Select(int.Parse)
+                .Where(number => number <= 1000)
                 .Sum();
         }
 
