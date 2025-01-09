@@ -8,7 +8,7 @@ using StringCalculator1;
 
 namespace StringCalculator1Tests
 {
-    public class InputStringCleanerTests
+    public class InputStringParserTests
     {
 
         [SetUp]
@@ -21,10 +21,10 @@ namespace StringCalculator1Tests
         {
             // Arrange
             string input = "    1,2       ";
-            var cleaner = new InputStringCleaner();
+            var parser = new InputStringParser();
 
             // Act 
-            string result = cleaner.Clean(input);
+            string result = parser.Clean(input);
 
             // Assert
             result.Should().Be("1,2");
@@ -36,10 +36,10 @@ namespace StringCalculator1Tests
         {
             // Arrange
             string input = "1;2;3";
-            var cleaner = new InputStringCleaner();
+            var parser = new InputStringParser();
 
             // Act 
-            string result = cleaner.Clean(input);
+            string result = parser.Clean(input);
 
             // Assert
             result.Should().Be("1,2,3");
@@ -51,13 +51,29 @@ namespace StringCalculator1Tests
         {
             // Arrange
             string input = "//;\n1;2;3";
-            var cleaner = new InputStringCleaner();
+            var parser = new InputStringParser();
 
             // Act 
-            string result = cleaner.Clean(input);
+            string result = parser.Clean(input);
 
             // Assert
             result.Should().Be("1,2,3");
+
+        }
+
+        [Test]
+        public void ConvertCleanInputToArray_StringWithDifferentDelimeterOnFirstLine_ExpecCleanString()
+        {
+            // Arrange
+            string input = "1,2,3";
+            var parser = new InputStringParser();
+
+            // Act 
+            int[] result = parser.ConvertCleanInputToArray(input).ToArray();
+
+            // Assert
+            int[] expectedResult = [1, 2, 3];
+            result.Should().ContainInOrder(expectedResult);
 
         }
     }

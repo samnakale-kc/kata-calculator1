@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StringCalculator1
 {
-    public class InputStringCleaner
+    public class InputStringParser
     {
         public string Clean(string numbers)
         {
@@ -23,7 +23,7 @@ namespace StringCalculator1
                 cleanNumbersInput = cleanNumbersInput.Replace(customDelimeter, ",");
             }
 
-            Match matchWithoutFirstLine = Regex.Match(cleanNumbersInput, @"([^\d]+)");
+            Match matchWithoutFirstLine = Regex.Match(cleanNumbersInput, @"([^\d-]+)");
 
             if (matchWithoutFirstLine.Success)
             {
@@ -33,6 +33,15 @@ namespace StringCalculator1
             }
 
             return cleanNumbersInput;
+        }
+
+        public List<int> ConvertCleanInputToArray(string input)
+        {
+            char[] stringDelimeters = [',', '\n'];
+
+            return input.Split(stringDelimeters, StringSplitOptions.RemoveEmptyEntries)
+                .Select(int.Parse)
+                .ToList();
         }
     }
 }

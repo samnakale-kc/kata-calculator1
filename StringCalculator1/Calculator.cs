@@ -11,12 +11,21 @@ namespace StringCalculator1
     {
         public int Add(string numbers)
         {
-            var cleaner = new InputStringCleaner();
-            string cleanNumbersInput = cleaner.Clean(numbers);
+            var parser = new InputStringParser();
+            string cleanNumbersInput = parser.Clean(numbers);
+            var inputNumbers = parser.ConvertCleanInputToArray(cleanNumbersInput);
 
             if (cleanNumbersInput.Length == 0)
             {
                 return 0;
+            }
+
+            var negetiveNumbers = inputNumbers.Where(number => number < 0).ToArray();
+
+            if (negetiveNumbers.Length > 0)
+            {
+                var negetiveNumbersList = String.Join(",", negetiveNumbers);
+                throw new Exception("negatives not allowed " + negetiveNumbersList);
             }
 
             char[] stringDelimeters = [',', '\n'];
