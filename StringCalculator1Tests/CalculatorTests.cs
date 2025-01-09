@@ -99,5 +99,49 @@ namespace StringCalculator1Tests
 
         }
 
+        [Test]
+        public void Add_WithNegetiveNumber_ThrowsError()
+        {
+
+            // Arrange
+            var calculator = new Calculator();
+            var exceptionMessage = "";
+
+            // Act
+            try
+            {
+                int result = calculator.Add("-1, 2");
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
+
+            // Assert
+            exceptionMessage.Should().Be("negatives not allowed -1");
+        }
+
+
+        [Test]
+        public void Add_WithNegetiveNumbers_ThrowsError()
+        {
+            // Arrange
+            var calculator = new Calculator();
+            var exceptionMessage = "";
+
+            // Act
+            try
+            {
+                int result = calculator.Add("-1, -2");
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
+
+            // Assert
+            exceptionMessage.Should().Be("negatives not allowed -1,-2");
+        }
+
     }
 }
