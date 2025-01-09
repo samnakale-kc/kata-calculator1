@@ -143,5 +143,20 @@ namespace StringCalculator1Tests
             exceptionMessage.Should().Be("negatives not allowed -1,-2");
         }
 
+        [Test]
+        public void Add_NumbersBiggerThanOneThousand_ShouldBeIgnored()
+        {
+            // Arrange
+            string numbers = "2,1001";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(2);
+
+        }
+
     }
 }
