@@ -28,9 +28,7 @@ namespace StringCalculator1
                 throw new Exception("negatives not allowed " + negetiveNumbersList);
             }
 
-            char[] stringDelimeters = [',', '\n'];
-            return cleanNumbersInput.Split(stringDelimeters, StringSplitOptions.RemoveEmptyEntries)
-                .Select(int.Parse)
+            return inputNumbers
                 .Where(number => number <= 1000)
                 .Sum();
         }
