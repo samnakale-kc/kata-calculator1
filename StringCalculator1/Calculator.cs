@@ -13,18 +13,18 @@ namespace StringCalculator1
         {
             var parser = new InputStringParser();
             string cleanNumbersInput = parser.Clean(numbers);
-            var inputNumbers = parser.ConvertCleanInputToArray(cleanNumbersInput);
+            List<int> inputNumbers = parser.ConvertCleanInputToArray(cleanNumbersInput);
 
             if (cleanNumbersInput.Length == 0)
             {
                 return 0;
             }
 
-            var negetiveNumbers = inputNumbers.Where(number => number < 0).ToArray();
+            int[] negetiveNumbers = inputNumbers.Where(number => number < 0).ToArray();
 
             if (negetiveNumbers.Length > 0)
             {
-                var negetiveNumbersList = String.Join(",", negetiveNumbers);
+                string negetiveNumbersList = String.Join(",", negetiveNumbers);
                 throw new Exception("negatives not allowed " + negetiveNumbersList);
             }
 
