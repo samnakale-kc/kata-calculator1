@@ -13,6 +13,18 @@ namespace StringCalculator1
         {
             string cleanNumbersInput = numbers.Trim();
 
+            cleanNumbersInput = CleanStringWithMultipleDelimeterStrings(cleanNumbersInput);
+
+            cleanNumbersInput = CleanStringWithFirstLineAndSingleDelimeter(cleanNumbersInput);
+
+            cleanNumbersInput = CleanStringWithoutFirstLine(cleanNumbersInput);
+
+            return cleanNumbersInput;
+
+        }
+
+        static string CleanStringWithMultipleDelimeterStrings(string cleanNumbersInput)
+        {
             string regexPatternForMultipleDelimeters = @"\/\/\[(.+)\]\n*";
             Match multipleDelimetersMatch = Regex.Match(cleanNumbersInput, regexPatternForMultipleDelimeters);
 
@@ -25,6 +37,11 @@ namespace StringCalculator1
                 }
             }
 
+            return cleanNumbersInput;
+        }
+
+        static string CleanStringWithFirstLineAndSingleDelimeter(string cleanNumbersInput)
+        {
             Match match = Regex.Match(cleanNumbersInput, @"\/\/(.+)\n*");
 
             if (match.Success)
@@ -35,6 +52,11 @@ namespace StringCalculator1
                 cleanNumbersInput = cleanNumbersInput.Replace(customDelimeter, ",");
             }
 
+            return cleanNumbersInput;
+        }
+
+        static string CleanStringWithoutFirstLine(string cleanNumbersInput)
+        {
             Match matchWithoutFirstLine = Regex.Match(cleanNumbersInput, @"([^\d-]+)");
 
             if (matchWithoutFirstLine.Success)

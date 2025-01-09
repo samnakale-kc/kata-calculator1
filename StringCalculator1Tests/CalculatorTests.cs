@@ -188,5 +188,20 @@ namespace StringCalculator1Tests
 
         }
 
+        [Test]
+        public void Add_InputStringWithMoreThanOneDelimeterWithMultipleCharacters_ExpectSum()
+        {
+            // Arrange
+            string numbers = "//[***][%%%]\n1***5%%%3";
+            var calculator = new Calculator();
+
+            // Act 
+            int result = calculator.Add(numbers);
+
+            // Assert
+            result.Should().Be(9);
+
+        }
+
     }
 }
