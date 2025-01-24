@@ -21,7 +21,7 @@ namespace StringCalculator1
                 return _defaultListWhenEmptyString;
             }
 
-            string[] numbersList = cleanNumbers.Split(',');
+            string[] numbersList = cleanNumbers.Split([',', '\n'], StringSplitOptions.RemoveEmptyEntries);
             int listLength = numbersList.Length;
             int[] numbers = new int[listLength];
 
