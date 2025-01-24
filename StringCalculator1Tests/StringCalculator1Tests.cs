@@ -33,5 +33,20 @@ namespace StringCalculator1Tests
             // Assert
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData("1,2,3,4,5,6,7", 28)]
+        [InlineData("1,2", 3)]
+        public void GivenUnknownAmountOfNumbers_WhenAddCalled_ThenReturnSum(string numbers, int expectedResult)
+        {
+            // Arrange
+            var calculator = new Calculator();
+
+            // Act
+            int result = calculator.Add(numbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
