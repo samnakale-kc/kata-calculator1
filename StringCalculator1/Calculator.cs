@@ -6,21 +6,14 @@ namespace StringCalculator1
     {
         public int Add(string numbers)
         {
-            const int defaultSum = 0;
+            var parser = new StringParser();
+            int[] numbersList = parser.parse(numbers);
 
-            string cleanNumbers = numbers.Trim();
-
-            if (cleanNumbers.Length == 0)
-            {
-                return defaultSum;
-            }
-
-            string[] numbersList = cleanNumbers.Split(',');
             int sum = 0;
 
             for (int i = 0; i < numbersList.Length; i++)
             {
-                sum = sum + int.Parse(numbersList[i]);
+                sum = sum + numbersList[i];
             }
 
             return sum;
