@@ -48,5 +48,19 @@ namespace StringCalculator1Tests
             // Assert
             Assert.Equal(expectedResult, result);
         }
+
+        [Theory]
+        [InlineData("1\n2", 3)]
+        public void GivenInputStringWithNewLineInsteadOfComma_WhenAddCalled_ThenReturnSum(string numbers, int expectedResult)
+        {
+            // Arrange
+            var calculator = new Calculator();
+
+            // Act
+            int result = calculator.Add(numbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
