@@ -1,11 +1,13 @@
 ﻿using System;
 using StringCalculator1.Services;
+using StringCalculator1.Services.Delimeter;
 
 namespace StringCalculator1
 {
     public class Calculator
     {
         private readonly IStringParser _parser;
+
         public Calculator(IStringParser parser)
         {
             _parser = parser;
@@ -13,8 +15,7 @@ namespace StringCalculator1
 
         public int Add(string numbers)
         {
-            var parser = new StringParser();
-            int[] numbersList = parser.Parse(numbers);
+            int[] numbersList = _parser.Parse(numbers);
 
             int sum = 0;
 
