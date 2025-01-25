@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StringCalculator1
+namespace StringCalculator1.Services
 {
-    public class StringParser
+    public class StringParser : IStringParser
     {
 
         private readonly int[] _defaultListWhenEmptyString = new int[0];
 
-        public int[] parse(string input)
+        public int[] Parse(string input)
         {
             string cleanNumbers = input.Trim();
 
@@ -33,5 +33,6 @@ namespace StringCalculator1
 
             return numbers;
         }
+
     }
 }
