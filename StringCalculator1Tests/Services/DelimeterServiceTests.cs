@@ -40,10 +40,24 @@ namespace StringCalculator1Tests.Services
         }
 
         [Fact]
-        public void GivenCustomMultiCharacterDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnCustomDelimeter()
+        public void GivenCustomMultiCharacterDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnNumbers()
         {
             // Arrange
             string inputNumbers = "//***\n1***2***3";
+            string[] expectedResult = ["1", "2", "3"];
+
+            // Act
+            string[] result = _delimeterService.GetNumbersFromDelimetedString(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GivenMultipleCustomDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnNumbers()
+        {
+            // Arrange
+            string inputNumbers = "//[*][%]\n1*2%3";
             string[] expectedResult = ["1", "2", "3"];
 
             // Act
