@@ -36,7 +36,7 @@ namespace StringCalculator1.Services.DelimeterService
 
         public string GetCustomDelimeterFromFirstLine(string input)
         {
-            return input.Split('\n')[0].Replace(@"//", "");
+            return input.Split('\n')[0].Replace(_customDelimeterNewLineStartString, string.Empty);
         }
 
         public string GetCustomDelimeterFromInputWithoutFirstLine(string input)

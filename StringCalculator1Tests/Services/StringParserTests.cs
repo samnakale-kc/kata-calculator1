@@ -8,7 +8,6 @@ namespace StringCalculator1Tests.Services
     public class StringParserTests
     {
         private readonly IStringParser _parser;
-
         private readonly Mock<IDelimeterService> _delimeterServiceMock;
 
         public StringParserTests()
@@ -79,8 +78,6 @@ namespace StringCalculator1Tests.Services
             // Assert
             Assert.Equal(expectedResult, result);
         }
-
-
 
         [Fact]
         public void GivenInputWithANegativeNumber_WhenAddCalled_ThenThrowAnException()
