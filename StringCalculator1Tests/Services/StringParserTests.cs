@@ -1,4 +1,5 @@
 ﻿using Moq;
+using StringCalculator1;
 using StringCalculator1.Services.DelimeterService;
 using StringCalculator1.Services.StringParser;
 
@@ -77,6 +78,34 @@ namespace StringCalculator1Tests.Services
 
             // Assert
             Assert.Equal(expectedResult, result);
+        }
+
+
+
+        [Fact]
+        public void GivenInputWithANegetiveNumber_WhenAddCalled_ThenThrowAnException()
+        {
+            // Arrange
+            string inputNumbers = "1;-2;5";
+            string[] expectedNumbersFromDelimeterService = ["1", "-2", "5"];
+            _delimeterServiceMock.Setup(s => s.GetNumbersFromDelimetedString(inputNumbers)).Returns(expectedNumbersFromDelimeterService);
+
+            // Act & Assert
+            var ex = Assert.Throws<Exception>(() => _parser.Parse(inputNumbers));
+            Assert.Equal("negatives not allowed -2", ex.Message);
+        }
+
+        [Fact]
+        public void GivenInputWithNegetiveNumbers_WhenAddCalled_ThenThrowAnException()
+        {
+            // Arrange
+            string inputNumbers = "1;-2;-5";
+            string[] expectedNumbersFromDelimeterService = ["1", "-2", "-5"];
+            _delimeterServiceMock.Setup(s => s.GetNumbersFromDelimetedString(inputNumbers)).Returns(expectedNumbersFromDelimeterService);
+
+            // Act & Assert
+            var ex = Assert.Throws<Exception>(() => _parser.Parse(inputNumbers));
+            Assert.Equal("negatives not allowed -2,-5", ex.Message);
         }
     }
 }
