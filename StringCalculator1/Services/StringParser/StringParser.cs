@@ -25,7 +25,7 @@ namespace StringCalculator1.Services.StringParser
             string[] numbersList = _delimeterService.GetNumbersFromDelimetedString(cleanNumbers);
             int listLength = numbersList.Length;
             int[] numbers = new int[listLength];
-            var negetiveNumbers = new List<string>();
+            var negativeNumbers = new List<string>();
 
             for (int i = 0; i < listLength; i++)
             {
@@ -34,13 +34,13 @@ namespace StringCalculator1.Services.StringParser
 
                 if (number < 0)
                 {
-                    negetiveNumbers.Add(numbersList[i]);
+                    negativeNumbers.Add(numbersList[i]);
                 }
             }
 
-            if (negetiveNumbers.Count > 0)
+            if (negativeNumbers.Count > 0)
             {
-                string message = "negatives not allowed " + string.Join(",", negetiveNumbers);
+                string message = "negatives not allowed " + string.Join(",", negativeNumbers);
                 throw new Exception(message);
             }
 

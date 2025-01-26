@@ -83,7 +83,7 @@ namespace StringCalculator1Tests.Services
 
 
         [Fact]
-        public void GivenInputWithANegetiveNumber_WhenAddCalled_ThenThrowAnException()
+        public void GivenInputWithANegativeNumber_WhenAddCalled_ThenThrowAnException()
         {
             // Arrange
             string inputNumbers = "1;-2;5";
@@ -96,7 +96,7 @@ namespace StringCalculator1Tests.Services
         }
 
         [Fact]
-        public void GivenInputWithNegetiveNumbers_WhenAddCalled_ThenThrowAnException()
+        public void GivenInputWithNegativeNumbers_WhenAddCalled_ThenThrowAnException()
         {
             // Arrange
             string inputNumbers = "1;-2;-5";
