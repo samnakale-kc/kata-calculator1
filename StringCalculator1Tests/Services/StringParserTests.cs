@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Moq;
-using StringCalculator1;
-using StringCalculator1.Services;
-using StringCalculator1.Services.Delimeter;
+﻿using Moq;
+using StringCalculator1.Services.DelimeterService;
+using StringCalculator1.Services.StringParser;
 
-namespace StringCalculator1Tests
+namespace StringCalculator1Tests.Services
 {
     public class StringParserTests
     {
@@ -16,11 +10,11 @@ namespace StringCalculator1Tests
 
         private readonly Mock<IDelimeterService> _delimeterServiceMock;
 
-        public StringParserTests() 
+        public StringParserTests()
         {
             _delimeterServiceMock = new Mock<IDelimeterService>();
             _parser = new StringParser(_delimeterServiceMock.Object);
-            
+
         }
 
         [Fact]

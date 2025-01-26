@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using StringCalculator1.Services.Delimeter;
+﻿using StringCalculator1.Services.DelimeterService;
 
-namespace StringCalculator1.Services
+namespace StringCalculator1.Services.StringParser
 {
     public class StringParser : IStringParser
     {
@@ -14,7 +8,7 @@ namespace StringCalculator1.Services
 
         private readonly IDelimeterService _delimeterService;
 
-        public StringParser(IDelimeterService delimeterService) 
+        public StringParser(IDelimeterService delimeterService)
         {
             _delimeterService = delimeterService;
         }
@@ -22,7 +16,6 @@ namespace StringCalculator1.Services
         public int[] Parse(string input)
         {
             string cleanNumbers = input.Trim();
-            string[] delimetersToSplitStringBy = [",", "\n"];
 
             if (cleanNumbers.Length == 0)
             {

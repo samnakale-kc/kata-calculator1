@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StringCalculator1.Services.Delimeter
+namespace StringCalculator1.Services.DelimeterService
 {
     public class DelimeterService
     {
@@ -43,7 +43,7 @@ namespace StringCalculator1.Services.Delimeter
         {
             foreach (char currentInputCharacter in input)
             {
-                if (!Char.IsDigit(currentInputCharacter))
+                if (!char.IsDigit(currentInputCharacter))
                 {
                     return currentInputCharacter.ToString();
                 }
@@ -56,10 +56,10 @@ namespace StringCalculator1.Services.Delimeter
         {
             var defaultDelimetersList = _defaultdelimeters.ToList();
 
-            foreach(char currentInputCharacter in input)
+            foreach (char currentInputCharacter in input)
             {
                 bool currentCharIsNotContainedInDefaultDelimeters = defaultDelimetersList.Contains(currentInputCharacter.ToString());
-                if (!Char.IsDigit(currentInputCharacter) && !currentCharIsNotContainedInDefaultDelimeters)
+                if (!char.IsDigit(currentInputCharacter) && !currentCharIsNotContainedInDefaultDelimeters)
                 {
                     return true;
                 }

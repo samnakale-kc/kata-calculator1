@@ -1,6 +1,5 @@
 ﻿using System;
-using StringCalculator1.Services;
-using StringCalculator1.Services.Delimeter;
+using StringCalculator1.Services.StringParser;
 
 namespace StringCalculator1
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StringCalculator1.Services.Delimeter
+namespace StringCalculator1.Services.DelimeterService
 {
     public interface IDelimeterService
     {
