@@ -4,36 +4,50 @@ namespace StringCalculator1Tests.Services
 {
     public class DelimeterServiceTests
     {
-        private readonly DelimeterService _delimeter;
+        private readonly DelimeterService _delimeterService;
 
         public DelimeterServiceTests()
         {
-            _delimeter = new DelimeterService();
+            _delimeterService = new DelimeterService();
         }
 
         [Fact]
-        public void GivenCommaDelimetedInput_WhenParseCalled_ThenReturnNumbers()
+        public void GivenCommaDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnNumbers()
         {
             // Arrange
             string inputNumbers = "1,2";
             string[] expectedResult = ["1", "2"];
 
             // Act
-            string[] result = _delimeter.GetNumbersFromDelimetedString(inputNumbers);
+            string[] result = _delimeterService.GetNumbersFromDelimetedString(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public void GivenCustomDelimetedInput_WhenParseCalled_ThenReturnNumbers()
+        public void GivenCustomDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnNumbers()
         {
             // Arrange
             string inputNumbers = "//;\n1;2";
             string[] expectedResult = ["1", "2"];
 
             // Act
-            string[] result = _delimeter.GetNumbersFromDelimetedString(inputNumbers);
+            string[] result = _delimeterService.GetNumbersFromDelimetedString(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GivenCustomMultiCharacterDelimetedInput_WhenGetNumbersFromDelimetedStringCalled_ThenReturnCustomDelimeter()
+        {
+            // Arrange
+            string inputNumbers = "//***\n1***2***3";
+            string[] expectedResult = ["1", "2", "3"];
+
+            // Act
+            string[] result = _delimeterService.GetNumbersFromDelimetedString(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -47,7 +61,21 @@ namespace StringCalculator1Tests.Services
             string expectedResult = ";";
 
             // Act
-            string result = _delimeter.GetCustomDelimeterFromFirstLine(inputNumbers);
+            string result = _delimeterService.GetCustomDelimeterFromFirstLine(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GivenCustomMultiCharacterDelimetedInput_WhenGetCustomDelimeterFromFirstLineCalled_ThenReturnCustomDelimeter()
+        {
+            // Arrange
+            string inputNumbers = "//***\n1***2***3";
+            string expectedResult = "***";
+
+            // Act
+            string result = _delimeterService.GetCustomDelimeterFromFirstLine(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -61,7 +89,7 @@ namespace StringCalculator1Tests.Services
             bool expectedResult = true;
 
             // Act
-            bool result = _delimeter.InputHasFirstLineWithDelimeter(inputNumbers);
+            bool result = _delimeterService.InputHasFirstLineWithDelimeter(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -75,7 +103,7 @@ namespace StringCalculator1Tests.Services
             bool expectedResult = false;
 
             // Act
-            bool result = _delimeter.InputHasFirstLineWithDelimeter(inputNumbers);
+            bool result = _delimeterService.InputHasFirstLineWithDelimeter(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
@@ -89,7 +117,7 @@ namespace StringCalculator1Tests.Services
             string[] expectedResult = ["1","2","5"];
 
             // Act
-            string[] result = _delimeter.GetNumbersFromDelimetedString(inputNumbers);
+            string[] result = _delimeterService.GetNumbersFromDelimetedString(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
