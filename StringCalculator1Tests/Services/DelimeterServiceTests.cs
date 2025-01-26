@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StringCalculator1;
 using StringCalculator1.Services;
 using StringCalculator1.Services.Delimeter;
 
@@ -46,42 +47,56 @@ namespace StringCalculator1Tests.Services
         }
 
         [Fact]
-        public void GivenCustomDelimetedInput_WhenGetCustomDelimeterCalled_ThenReturnCustomDelimeter()
+        public void GivenCustomDelimetedInput_WhenGetCustomDelimeterFromFirstLineCalled_ThenReturnCustomDelimeter()
         {
             // Arrange
             string inputNumbers = "//;\n1;2";
             string expectedResult = ";";
 
             // Act
-            string result = _delimeter.GetCustomDelimeter(inputNumbers);
+            string result = _delimeter.GetCustomDelimeterFromFirstLine(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public void GivenCustomDelimetedInput_WhenStringHasCustomDelimeterCalled_ThenReturnTrue()
+        public void GivenCustomDelimetedInput_WhenStringInputHasFirstLineWithDelimeterCalled_ThenReturnTrue()
         {
             // Arrange
             string inputNumbers = "//;\n1;2";
             bool expectedResult = true;
 
             // Act
-            bool result = _delimeter.StringHasCustomDelimeter(inputNumbers);
+            bool result = _delimeter.InputHasFirstLineWithDelimeter(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);
         }
 
         [Fact]
-        public void GivenCommaDelimetedInput_WhenStringHasCustomDelimeterCalled_ThenReturnFalse()
+        public void GivenCommaDelimetedInput_WhenStringInputHasFirstLineWithDelimeterCalled_ThenReturnFalse()
         {
             // Arrange
             string inputNumbers = "1,2";
             bool expectedResult = false;
 
             // Act
-            bool result = _delimeter.StringHasCustomDelimeter(inputNumbers);
+            bool result = _delimeter.InputHasFirstLineWithDelimeter(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GivenCustomDelimetedInputWithoutFirstLine_WhenGetNumbersFromDelimetedStringCalled_ThenReturnSum()
+        {
+            // Arrange
+            string inputNumbers = "1x2x5";
+            string[] expectedResult = ["1","2","5"];
+
+            // Act
+            string[] result = _delimeter.GetNumbersFromDelimetedString(inputNumbers);
 
             // Assert
             Assert.Equal(expectedResult, result);

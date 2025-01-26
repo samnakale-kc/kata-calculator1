@@ -82,9 +82,26 @@ namespace StringCalculator1Tests
         [Fact]
         public void GivenCustomDelimetedInput_WhenAddCalled_ThenReturnSum()
         {
+            // Arrange
             string inputNumbers = "//;\n1;2";
             int expectedResult = 3;
             int[] expectedParsedResult = [1, 2];
+            _mockParser.Setup(s => s.Parse(inputNumbers)).Returns(expectedParsedResult);
+
+            // Act
+            int result = _calculator.Add(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Fact]
+        public void GivenCustomDelimetedInputWithoutFirstLine_WhenAddCalled_ThenReturnSum()
+        {
+            // Arrange
+            string inputNumbers = "1x2x5";
+            int expectedResult = 8;
+            int[] expectedParsedResult = [1, 2, 5];
             _mockParser.Setup(s => s.Parse(inputNumbers)).Returns(expectedParsedResult);
 
             // Act

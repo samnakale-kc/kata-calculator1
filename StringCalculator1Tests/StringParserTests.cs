@@ -68,5 +68,21 @@ namespace StringCalculator1Tests
             // Assert
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void GivenCustomDelimetedInputWithoutFirstLine_WhenAddCalled_ThenReturnSum()
+        {
+            // Arrange
+            string inputNumbers = "1;2;5";
+            int[] expectedResult = [1, 2, 5];
+            string[] expectedNumbersFromDelimeterService = ["1", "2", "5"];
+            _delimeterServiceMock.Setup(s => s.GetNumbersFromDelimetedString(inputNumbers)).Returns(expectedNumbersFromDelimeterService);
+
+            // Act
+            int[] result = _parser.Parse(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
     }
 }

@@ -10,14 +10,23 @@ namespace StringCalculator1.Services.Delimeter
     {
 
         private readonly string _customDelimeterNewLineStartString = @"//";
+        private readonly string[] _defaultdelimeters = [",", "\n"];
 
         public string[] GetNumbersFromDelimetedString(string numbers)
         {
-            string[] delimetersToSplitStringBy = [",", "\n"];
+            string[] delimetersToSplitStringBy = _defaultdelimeters;
+            bool inputHasFirstLineWithDelimeter = InputHasFirstLineWithDelimeter(numbers);
+            bool inputHasCustomDelimeter = InputHasCustomDelimeter(numbers);
 
-            if (StringHasCustomDelimeter(numbers))
+            if (!inputHasFirstLineWithDelimeter && inputHasCustomDelimeter)
             {
-                string customDelimeter = GetCustomDelimeter(numbers);
+                string customDelimeter = GetCustomDelimeterFromInputWithoutFirstLine(numbers);
+                delimetersToSplitStringBy = [customDelimeter];
+            }
+
+            if (inputHasFirstLineWithDelimeter)
+            {
+                string customDelimeter = GetCustomDelimeterFromFirstLine(numbers);
                 numbers = RemoveFirstLineFromCustomDelimetedInput(numbers);
                 delimetersToSplitStringBy = [customDelimeter];
             }
@@ -25,12 +34,41 @@ namespace StringCalculator1.Services.Delimeter
             return numbers.Split(delimetersToSplitStringBy, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public string GetCustomDelimeter(string input)
+        public string GetCustomDelimeterFromFirstLine(string input)
         {
             return input.Split('\n')[0].Replace(@"//", "");
         }
 
-        public bool StringHasCustomDelimeter(string input)
+        public string GetCustomDelimeterFromInputWithoutFirstLine(string input)
+        {
+            foreach (char currentInputCharacter in input)
+            {
+                if (!Char.IsDigit(currentInputCharacter))
+                {
+                    return currentInputCharacter.ToString();
+                }
+            }
+
+            return string.Empty; // Technically, we should never reach here
+        }
+
+        public bool InputHasCustomDelimeter(string input)
+        {
+            var defaultDelimetersList = _defaultdelimeters.ToList();
+
+            foreach(char currentInputCharacter in input)
+            {
+                bool currentCharIsNotContainedInDefaultDelimeters = defaultDelimetersList.Contains(currentInputCharacter.ToString());
+                if (!Char.IsDigit(currentInputCharacter) && !currentCharIsNotContainedInDefaultDelimeters)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool InputHasFirstLineWithDelimeter(string input)
         {
             if (input.StartsWith(_customDelimeterNewLineStartString) && input.Contains('\n'))
             {
@@ -44,7 +82,7 @@ namespace StringCalculator1.Services.Delimeter
 
         public string RemoveFirstLineFromCustomDelimetedInput(string input)
         {
-            if (!StringHasCustomDelimeter(input))
+            if (!InputHasFirstLineWithDelimeter(input))
             {
                 return input;
             }
