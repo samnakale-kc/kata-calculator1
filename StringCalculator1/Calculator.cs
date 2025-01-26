@@ -7,6 +7,8 @@ namespace StringCalculator1
     {
         private readonly IStringParser _parser;
 
+        private readonly int _maximumNumberToAdd = 1000;
+
         public Calculator(IStringParser parser)
         {
             _parser = parser;
@@ -20,7 +22,10 @@ namespace StringCalculator1
 
             for (int i = 0; i < numbersList.Length; i++)
             {
-                sum = sum + numbersList[i];
+                if (numbersList[i] <= _maximumNumberToAdd)
+                {
+                    sum = sum + numbersList[i];
+                }
             }
 
             return sum;
