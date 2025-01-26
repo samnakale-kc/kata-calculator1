@@ -110,5 +110,21 @@ namespace StringCalculator1Tests
             // Assert
             Assert.Equal(expectedResult, result);
         }
+
+        [Fact]
+        public void GivenInputNumbersGreaterThanOneThousand_WhenAddCalled_ThenIgnoreNumbersGreaterThanOneThousandAndReturnSum()
+        {
+            // Arrange
+            string inputNumbers = "1;2000";
+            int expectedResult = 1;
+            int[] expectedParsedResult = [1, 2000];
+            _mockParser.Setup(s => s.Parse(inputNumbers)).Returns(expectedParsedResult);
+
+            // Act
+            int result = _calculator.Add(inputNumbers);
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
     }
 }
